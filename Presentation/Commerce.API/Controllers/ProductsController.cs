@@ -1,5 +1,4 @@
-﻿using Commerce.Application.Abstractions;
-using Microsoft.AspNetCore.Http;
+﻿using Commerce.Application.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Commerce.API.Controllers
@@ -8,18 +7,25 @@ namespace Commerce.API.Controllers
 	[ApiController]
 	public class ProductsController : ControllerBase
 	{
-		private readonly IProductService _productService;
+		private readonly IProductReadRepository _readRepository;
+		private readonly IProductWriteRepository _writeRepository;
 
-		public ProductsController(IProductService productService)
+		public ProductsController(IProductReadRepository readRepository, IProductWriteRepository writeRepository)
 		{
-			_productService = productService;
+			_readRepository = readRepository;
+			_writeRepository = writeRepository;
 		}
 
 		[HttpGet]
-		public IActionResult Get()
+		public async void Get()
 		{
-			var values = _productService.GetProducts();
-			return Ok(values);
+			await _writeRepository.AddRangeAsync(new()
+			{
+				new () { Id = Guid.NewGuid(), CreateDate = DateTime.UtcNow, Name = "Product 1", Price = 120, Stock = 20 },
+				new () { Id = Guid.NewGuid(), CreateDate = DateTime.UtcNow, Name = "Product 2", Price = 130, Stock = 40 },
+				new () { Id = Guid.NewGuid(), CreateDate = DateTime.UtcNow, Name = "Product 3", Price = 150, Stock = 60 }
+			});
+			await _writeRepository.SaveChanges();
 		}
 	}
 }
