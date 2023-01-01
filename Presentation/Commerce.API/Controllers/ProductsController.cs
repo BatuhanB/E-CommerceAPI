@@ -17,7 +17,7 @@ namespace Commerce.API.Controllers
 		}
 
 		[HttpGet]
-		public async void Get()
+		public async Task Get()
 		{
 			await _writeRepository.AddRangeAsync(new()
 			{
@@ -26,6 +26,13 @@ namespace Commerce.API.Controllers
 				new () { Id = Guid.NewGuid(), CreateDate = DateTime.UtcNow, Name = "Product 3", Price = 150, Stock = 60 }
 			});
 			await _writeRepository.SaveChanges();
+		}
+
+		[HttpGet("{id}")]
+		public async Task<IActionResult> Get( string id)
+		{
+			var result = await _readRepository.GetByIdAsync(id);
+			return Ok(result);
 		}
 	}
 }
