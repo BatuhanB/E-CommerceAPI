@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Commerce.API.Controllers
 {
-	[Route("api/[controller]")]
+	[Route("api/[controller]/[action]")]
 	[ApiController]
 	public class ProductsController : ControllerBase
 	{
@@ -17,15 +17,10 @@ namespace Commerce.API.Controllers
 		}
 
 		[HttpGet]
-		public async Task Get()
+		public async Task<IActionResult> GetAll()
 		{
-			await _writeRepository.AddRangeAsync(new()
-			{
-				new () { Id = Guid.NewGuid(), CreateDate = DateTime.UtcNow, Name = "Product 1", Price = 120, Stock = 20 },
-				new () { Id = Guid.NewGuid(), CreateDate = DateTime.UtcNow, Name = "Product 2", Price = 130, Stock = 40 },
-				new () { Id = Guid.NewGuid(), CreateDate = DateTime.UtcNow, Name = "Product 3", Price = 150, Stock = 60 }
-			});
-			await _writeRepository.SaveChanges();
+			var data = _readRepository.GetAll();
+			return Ok(data);
 		}
 
 		[HttpGet("{id}")]

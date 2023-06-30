@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Commerce.Persistence.Repositories;
 
-public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity
+public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity, new()
 {
 	private readonly AppDbContext _dbContext;
 	public ReadRepository(AppDbContext dbContext)

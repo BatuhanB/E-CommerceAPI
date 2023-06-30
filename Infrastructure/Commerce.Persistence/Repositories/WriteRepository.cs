@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Commerce.Persistence.Repositories;
 
-public class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity
+public class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity, new()
 {
 	private readonly AppDbContext _context;
 

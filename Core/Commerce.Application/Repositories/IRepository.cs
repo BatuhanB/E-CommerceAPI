@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Commerce.Application.Repositories;
 
-public interface IRepository<T> where T : BaseEntity
+public interface IRepository<T> where T : BaseEntity, new()
 {
 	DbSet<T> Table { get; }
 }

@@ -1,9 +1,8 @@
 ﻿using Commerce.Domain.Entities.Common;
-using System.Collections.Generic;
 
 namespace Commerce.Domain.Entities
 {
-	public class Order:BaseEntity
+    public sealed class Order:BaseEntity
 	{
 		public string Description { get; set; }
 		public string Adress { get; set; }
