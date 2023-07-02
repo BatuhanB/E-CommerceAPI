@@ -22,15 +22,12 @@ public class AppDbContext : DbContext
 		var datas = ChangeTracker.Entries<BaseEntity>();
 		foreach (var entries in datas)
 		{
-			switch (entries.State)
+			_ = entries.State switch
 			{
-				case EntityState.Added:
-					entries.Entity.CreateDate = DateTime.UtcNow;
-					break;
-				case EntityState.Modified:
-					entries.Entity.UpdatedDate = DateTime.UtcNow;
-					break;
-			}
+				EntityState.Added => entries.Entity.CreateDate = DateTime.UtcNow,
+				EntityState.Modified => entries.Entity.UpdatedDate = DateTime.UtcNow,
+			};
+			
 		}
 		return await base.SaveChangesAsync(cancellationToken);
 	}

@@ -24,7 +24,7 @@ namespace Commerce.API.Controllers
 				Description = "Lorem IPSUM LOREM UPSUNMSMS",
 				CustomerId = Guid.Parse("064fee40-21b1-4b84-9a73-12076267a3c7")
 			});
-			await _orderWriteRepository.SaveChanges();
+			await _orderWriteRepository.SaveChangesAsync();
 			return Ok(result);
 		}
 	}

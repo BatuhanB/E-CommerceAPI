@@ -24,7 +24,7 @@ namespace Commerce.API.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public async Task<IActionResult> Get( string id)
+		public async Task<IActionResult> Get(Guid id)
 		{
 			var result = await _readRepository.GetByIdAsync(id);
 			return Ok(result);
