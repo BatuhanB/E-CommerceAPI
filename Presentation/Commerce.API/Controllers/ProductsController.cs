@@ -1,6 +1,7 @@
 ﻿using Commerce.Application.Repositories;
 using Commerce.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 
 namespace Commerce.API.Controllers
 {
@@ -32,11 +33,15 @@ namespace Commerce.API.Controllers
         }
 
         [HttpPost]
-        public async Task<bool> Add([FromBody] Product model)
+        public async Task<IActionResult> Add([FromBody] Product model)
         {
-            var res = await _writeRepository.AddAsync(model);
-            await _writeRepository.SaveChangesAsync();
-            return res;
+            var result = false;
+            if (ModelState.IsValid)
+            {
+                result = await _writeRepository.AddAsync(model);
+                await _writeRepository.SaveChangesAsync();
+            }
+            return Ok(result);
         }
     }
 }
