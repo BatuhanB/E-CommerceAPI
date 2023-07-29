@@ -6,5 +6,6 @@
 		public DateTime CreateDate { get; set; }
 		public DateTime UpdatedDate { get; set; }
 		public bool? IsActive { get; set; }
+		public bool? IsDeleted { get; set; }
 	}
 }
