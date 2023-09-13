@@ -49,5 +49,13 @@ namespace Commerce.API.Controllers
 			}
 			return Ok(result);
 		}
+
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> Delete(string id)
+		{
+			await _writeRepository.Remove(id);
+			await _writeRepository.SaveChangesAsync();
+			return Ok();
+		}
 	}
 }
