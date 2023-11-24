@@ -25,11 +25,11 @@ public class AppDbContext : DbContext
             switch (entries.State)
             {
                 case EntityState.Modified:
-                    entries.Entity.CreateDate = DateTime.UtcNow;
+                    entries.Entity.UpdatedDate = DateTime.UtcNow;
                     entries.Entity.IsDeleted = false;
                     break;
                 case EntityState.Added:
-                    entries.Entity.UpdatedDate = DateTime.UtcNow;
+                    entries.Entity.CreateDate = DateTime.UtcNow;
                     entries.Entity.IsDeleted = false;
                     break;
                 default:

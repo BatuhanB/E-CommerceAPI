@@ -2,7 +2,7 @@
 using Commerce.Application.RequestParameters;
 using Commerce.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
+using Microsoft.EntityFrameworkCore;
 
 namespace Commerce.API.Controllers
 {
@@ -23,7 +23,7 @@ namespace Commerce.API.Controllers
 		public async Task<IActionResult> GetAll([FromQuery] Pagination pagination)
 		{
 			var totalCount = _readRepository.GetAll(false).Count();
-			var data = _readRepository.GetAll(false).Skip((pagination.Page - 1) * pagination.Size).Take(pagination.Size).ToList();
+			var data = await _readRepository.GetAll(false).Skip((pagination.Page - 1) * pagination.Size).Take(pagination.Size).ToListAsync();
 			return Ok(new
 			{
 				totalCount,

@@ -26,6 +26,12 @@ namespace Commerce.Application.Validators.Products
                 .WithMessage(ProductMessages.ProductStockCanNotBeNull())
                 .Must(x=>x >= 0)
                 .WithMessage(ProductMessages.ProductStockMinValue());
+            RuleFor(x => x.Stock)
+                .NotEmpty()
+                .NotNull()
+                .WithMessage(ProductMessages.ProductStockCanNotBeNull())
+                .LessThanOrEqualTo(1000)
+                .WithMessage(ProductMessages.ProductStockLessThanThousand());
         }
     }
 }
