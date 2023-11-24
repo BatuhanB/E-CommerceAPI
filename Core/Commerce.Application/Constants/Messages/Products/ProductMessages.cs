@@ -34,5 +34,14 @@
         {
             return "Product stock must be greater than 0 or equal!";
         }
+
+        public static string ProductStockLessThanThousand()
+        {
+            return "Product stock must be less than 1000 or equal!";
+        }
+        public static string ProductStockLessThanTwoThousand()
+        {
+            return "Product stock must be less than 2000 or equal!";
+        }
     }
 }

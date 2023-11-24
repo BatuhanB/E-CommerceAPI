@@ -21,7 +21,7 @@ public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity, new()
 		var query = Table.AsQueryable();
 		if (!tracking)
 			query = query.AsNoTracking();
-		return await query.FirstOrDefaultAsync(predicate);
+        return await query.FirstOrDefaultAsync(predicate);
 	}
 
 	public async Task<T> GetByIdAsync(Guid id, bool tracking = true)
